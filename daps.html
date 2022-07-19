@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HiFi-GAN: High-Fidelity Denoising and Dereverberation Based on Speech Deep Features in Adversarial Networks</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="jquery-3.5.js"></script>
+        <script type="text/javascript" id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    </head>
+    <body>
+        <!-- Header for all the pages -->
+<!-- title that shows photo and name -->
+<div class="container">
+    <div id="text1">HiFi-GAN: High-Fidelity Denoising and Dereverberation<br>
+        Based on Speech Deep Features in Adversarial Networks</div>
+    <div id="intro">
+        <p>
+            Jiaqi Su, Zeyu Jin, Adam Finkelstein
+            </p>
+        <p>
+        [<a href="https://arxiv.org/abs/2006.05694">Paper</a>]
+        <!--[<a>Github</a>]-->
+        <!--<a href="#">-->
+        <!--</a>-->
+        </p>
+    </div>
+</div>
+<!-- navigation bar -->
+<!--<nav>
+      <a href="index.php" class="nav-button" id="index-btn">HOME</a> 
+      <a href="projects.php" class="nav-button" id="projects-btn">PROJECTS</a>
+      <a href="resources.php" class="nav-button" id="resources-btn">RESOURCES</a>
+      <a href="interests.php" class="nav-button" id="interests-btn">INTERESTS</a>
+</nav>-->
+<!-- Define a javascript function  -->
+<!--<script>
+    /* Highlights the navigation bar button corresponding to page
+       to indicate which page a user is currently viewing.
+    */
+    function highlightCurrentPage(page) {
+       document.getElementById(page+"-btn").style.backgroundColor="#FFE364";
+       document.getElementById(page+"-btn").style.color="#666666";
+    }
+</script>-->
+        <!-- Hightlight the "HOME" button in navigation bar 
+            to indicate we are on this page -->
+        <!--<script type="text/javascript">
+            highlightCurrentPage("view");
+        </script>-->
+        <div class="content-container">
+            <img src="img/network-no-bg.jpg" id="img3" alt="Network">
+            <p>
+            Real-world audio recordings are often degraded by factors such as noise, reverberation, and equalization distortion. 
+            This paper introduces HiFi-GAN, a deep learning method to transform recorded speech to sound as though it had been recorded in a studio. 
+            We use an end-to-end feed-forward WaveNet architecture, trained with multi-scale adversarial discriminators in both the time domain and the time-frequency domain. 
+            It relies on the deep feature matching losses of the discriminators to improve the perceptual quality of enhanced speech. 
+            The proposed model generalizes well to new speakers, new speech content, and new environments. 
+            It significantly outperforms state-of-the-art baseline methods in both objective and subjective experiments.
+            <br>
+            Here, generator G includes a feed-forward WaveNet for speech enhancement, followed by a convolutional Postnet for cleanup. 
+            Discriminators evaluate the resulting waveform (\(D_W\), at multiple resolutions) and mel-spectrogram (\(D_S\)).
+            </p>
+        </div>
+        <!--<onclick="play('data/slt/wn2/slt_wn2_01103.mp3')" /></td><td><input id="slt_4_5"style="width:50px" type="button" value="PLAY" -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<div class="content-container">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <div class="content-title">Real Demo for Ted Talk</div>
+    <div class="option-div">
+        <p>Original input:</p>
+        <div id="input_TedTalk_waveform"></div>
+        <button id="input_TedTalk" class="play-button-demo btn btn-primary" onclick="wavesurfer.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>
+    <div class="option-div">
+        <p>HiFi-GAN enhanced result:</p>
+        <div id="HiFiGAN_TedTalk_waveform"></div>
+        <button id="HiFiGAN_TedTalk" class="play-button-demo btn btn-primary" onclick="wavesurfer_2.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>
+    <div class="content-title">Real Demo for VCTK Noisy</div>
+    <div class="option-div">
+        <p>Original input:</p>
+        <div id="input_VCTKNoisy_waveform"></div>
+        <button id="input_VCTKNoisy" class="play-button-demo btn btn-primary" onclick="wavesurfer_3.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>
+    <div class="option-div">
+        <p>HiFi-GAN enhanced result:</p>
+        <div id="HiFiGAN_VCTKNoisy_waveform"></div>
+        <button id="HiFiGAN_VCTKNoisy" class="play-button-demo btn btn-primary" onclick="wavesurfer_4.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>
+    <div class="content-title">Real Demo for DAPS</div>
+    <div class="option-div">
+        <p>Original input:</p>
+        <div id="input_DAPS_waveform"></div>
+        <button id="input_DAPS" class="play-button-demo btn btn-primary" onclick="wavesurfer_5.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>    
+    <div class="option-div">
+        <p>HiFi-GAN enhanced result:</p>
+        <div id="HiFiGAN_DAPS_waveform"></div>
+        <button id="HiFiGAN_DAPS" class="play-button-demo btn btn-primary" onclick="wavesurfer_6.playPause()">
+            <i class="fa fa-play"></i>
+            Play
+            /
+            <i class="fa fa-pause"></i>
+            Pause
+        </button>
+    </div>
+    <p>
+    * Using a model trained on our augmented synthetic dataset with speech corpus from the DAPS Dataset [7] and room impulse responses from MIT IR Survey Dataset [8].
+    </p>
+    <script>
+        var wavesurfer = WaveSurfer.create({
+                    container: '#input_TedTalk_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer.load('./audio/input_TedTalk.wav');
+        var wavesurfer_2 = WaveSurfer.create({
+                    container: '#HiFiGAN_TedTalk_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer_2.load('./audio/HiFiGAN_TedTalk.wav');
+	var wavesurfer_3 = WaveSurfer.create({
+                    container: '#input_VCTKNoisy_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer_3.load('./audio/input_VCTKNoisy.wav');
+        var wavesurfer_4 = WaveSurfer.create({
+                    container: '#HiFiGAN_VCTKNoisy_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer_4.load('./audio/HiFiGAN_48k_VCTKNoisy.wav');
+	var wavesurfer_5 = WaveSurfer.create({
+                    container: '#input_DAPS_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer_5.load('./audio/input_DAPS.m4a');
+        var wavesurfer_6 = WaveSurfer.create({
+                    container: '#HiFiGAN_DAPS_waveform',
+                    waveColor: 'violet',
+                    progressColor: 'purple'
+                });
+        wavesurfer_6.load('./audio/HiFiGAN_48k_DAPS.wav');
+    </script>
+</div>
+<div class="content-container">
+    <div class="content-title">SAMPLES</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.2.1/math.min.js"></script>
+    <!-- navigation bar -->
+    <!-- <nav>
+        <input id="f10_btn" type="button" value="Female" class="nav-button"
+                        onclick="highlightCurrentPage('f10')"  />
+        <input id="m10_btn" type="button" value="Male" class="nav-button"
+                        onclick="highlightCurrentPage('m10')"  />
+    </nav> -->
+    <div id='descript'>
+    </div>
+    <div id='legend'>
+        <ul style="list-style-type:circle">
+            <!-- <li>NAIVE: No matching</li>
+            <li>NMD: IR retrieved from NMD and applied to clean signal</li>
+            <li>EQ-M: Source-differentiated equalization matching </li>
+            <li>E2E: End-to-end acoustic matching </li>
+            <li>NN: IR retrieved by NN in the pre-trianed embedding </li>
+            <li>NN-CO: IR retrieved by NN in the co-trianed embedding </li>
+            <li>REF: ground truth matching</li> -->
+        </ul>    
+    </div>
+    <div class="option-div">
+                <label for="env-pairs">Choose a dataset:</label>
+                <select id="env-pairs" onchange=record(this)>
+        <option value=DAPS>The DAPS Dataset</option><option value=VCTK>The VCTK Noisy Dataset</option></select></div><div class="option-div">
+                <label for="speaker">Choose a speaker:</label>
+                <select id="speaker" onchange=record(this)></select></div><div id="src-tgt-env"> 
+                <div class="option-div" id="src-env-div"> 
+                    <label for="src-env">Choose a source environment:</label>
+                    <select id="src-env" onchange=record(this)>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+            </div><div id="loading-status">Loading......</div>    <div id="result-div">
+    </div>
+    <script>
+        var mode = 0;
+        var audio;
+        function play(file_name) {
+            if (audio) {
+                audio.pause();
+            }
+            audio = new Audio(file_name) ;
+            audio.play();
+            //document.getElementById("status").innerHTML = file_name;
+        }
+        function colorButtons() {
+            $( "input[type='button']" ).not(".nav-button").each(function() {
+                var name = $(this).attr('id').trim();
+                var parts = name.split("_");
+                var i_voice = parts[0];
+                var i_method = parts[1];
+                var i_sentence = parts[2];
+                // console.log(name);
+                // console.log(mos_data[selected][i_voice][i_method][i_sentence]);
+                if (mos_data[selected][i_voice][i_method][i_sentence]){
+                    var score = math.mean(mos_data[selected][i_voice][i_method][i_sentence]);
+                    var len = mos_data[selected][i_voice][i_method][i_sentence].length;
+                }
+                else{
+                    var score = 0;
+                    var len = 0;
+                }
+                var theVal = (score) * 0.25;
+                var percent  = Math.ceil(theVal * 100);
+                var text = "" + (Math.ceil(score*10)/10 + 1.0);
+
+                var color = 'hsl(' + percent + ', 100%, 50%)';
+                $(this).val(text);
+                // console.log(parts[0] + percent);
+                $(this).css('background-color',color);
+            });
+        }
+        // $().ready( function() {colorButtons();} );
+
+        function switchMode() {
+            if (document.getElementById("myonoffswitch").checked) {
+                mode = 0;
+            }
+            else {
+                mode = 1;
+            }
+            // colorButtons();
+        }
+    </script>
+    <script>
+        /* Highlights the navigation bar button corresponding to page
+        to indicate which page a user is currently viewing.
+        */
+        var env_pairs="DAPS";
+        var speaker="f10";
+        var src_env="all";
+
+        const queryString = window.location.search;
+        console.log("query string: "+queryString);
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.has('speaker')){
+            speaker = urlParams.get('speaker');
+        }
+        if (urlParams.has('env-pairs')){
+            env_pairs = urlParams.get('env-pairs');
+        }
+        if (urlParams.has('src-env')){
+            src_env = urlParams.get('src-env');
+        }
+
+        function lock(){
+            $('#speaker').attr('disabled', 'disabled');
+            $('#env-pairs').attr('disabled', 'disabled');
+            $('#src-env').attr('disabled', 'disabled');
+            $('#loading-status').show();
+        }
+        function unlock(){
+            $('#speaker').removeAttr('disabled');
+            $('#env-pairs').removeAttr('disabled');
+            $('#src-env').removeAttr('disabled');
+            $('#loading-status').hide();
+        }
+
+        function preload(speaker, env_pairs, src_env, push){
+            console.log(speaker + " " + env_pairs + " " + src_env );
+            lock();
+            $('#env-pairs').val(env_pairs);
+            $('#speaker').load("choices_voice.php?choice=" + env_pairs, function(){
+                $('#speaker').val(speaker);
+            });
+            $("#src-env").load("choices.php?choice=" + env_pairs +"&speaker="+speaker, function(){
+                $("#src-env").val(src_env);
+            });
+            $("#result-div").empty();
+            path = "index.php?env-pairs=" + env_pairs + "&speaker=" + speaker + "&src-env=" + src_env;
+            data = {"env-pairs": env_pairs, "speaker": speaker, "src-env": src_env};
+            if (push){
+                history.pushState(data, '', path);
+            }
+            $.get("results-server.php", data, 
+                    function (returnedHtml){
+                        $("#result-div").html(returnedHtml);
+                        unlock();
+                        // $("#descript").html(descript[speaker]);
+                        // colorButtons();
+                    });
+        }
+
+        preload(speaker, env_pairs, src_env, true);
+
+        function fetch_result(){
+            $(window).ready(function() {
+                speaker=$("#speaker").val();
+                env_pairs=$("#env-pairs").val();
+                src_env=$("#src-env").val();
+                // if (sel.id=="env-pairs"){
+                //     src_env="all";  
+                // }
+                $("#result-div").empty();
+                path = "index.php?env-pairs=" + env_pairs + "&speaker=" + speaker +  "&src-env=" + src_env;
+                data = {"env-pairs": env_pairs, "speaker": speaker, "src-env": src_env};
+                history.pushState(data, '', path);
+                $.get("results-server.php", data, 
+                        function (returnedHtml){
+                            $("#result-div").html(returnedHtml);
+                            unlock();
+                            // $("#descript").html(descript[speaker]);
+                            // colorButtons();
+                        });
+            });
+        }
+
+        function record(sel) {
+            lock();
+            if (sel.id=="env-pairs"){
+                $("#speaker").load("choices_voice.php?choice=" + $("#env-pairs").val(), function(){
+                    $("#src-env").load("choices.php?choice=" + $("#env-pairs").val() + "&speaker="+ $("#speaker").val(), function(){
+                        fetch_result();
+                    });
+                });
+            }
+            else{
+                if (sel.id=="speaker"){
+                    $("#src-env").load("choices.php?choice=" + $("#env-pairs").val() + "&speaker="+ $("#speaker").val(), function(){
+                        fetch_result();
+                    });
+                }
+                else{
+                    fetch_result();
+                }
+            }
+        }
+
+        window.addEventListener('popstate', function(e) {
+            preload(e.state["speaker"], e.state["env-pairs"], e.state["src-env"], false);
+        });
+    </script>
+    <!-- Define a javascript function  -->
+    <!-- <script>
+        /* Highlights the navigation bar button corresponding to page
+        to indicate which page a user is currently viewing.
+        */
+        var selected="m10";
+        function highlightCurrentPage(name) {
+            var id = name+"_btn";
+            console.log(id);
+            $(".nav-button").each(function() {
+                    $(this).css('background-color',"#999999");
+                    $(this).css('color',"white");
+                });
+            document.getElementById(id).style.backgroundColor="#FFE364";
+            document.getElementById(id).style.color="#666666";
+            selected=name;
+            $.get("results-server.php", 
+                    {"test": selected, }, function (returnedHtml){
+                $("#result-div").html(returnedHtml);
+                $("#descript").html(descript[selected]);
+                // colorButtons();
+            });
+        }
+        highlightCurrentPage(selected);
+    </script> -->
+</div>
+        <div class="content-container">
+            <div class="content-title">REFERENCES</div>
+            <ol>
+            <li>P. Scalart et al., “Speech enhancement based on a priori signal
+                to noise estimation,” in 1996 IEEE International Conference on
+                Acoustics, Speech, and Signal Processing Conference Proceedings,
+                vol. 2. IEEE, 1996, pp. 629–632.</li>
+            <li>T. Nakatani, T. Yoshioka, K. Kinoshita, M. Miyoshi, and B.-H.
+                Juang, “Speech dereverberation based on variance-normalized delayed
+                linear prediction,” IEEE Transactions on Audio, Speech,
+                and Language Processing, vol. 18, no. 7, pp. 1717–1731, 2010.</li>
+            <li>F. G. Germain, Q. Chen, and V. Koltun, “Speech denoising with deep feature losses,” 
+                Proc. Interspeech 2019, pp. 2723–2727.</li>
+            <li>R. Giri, U. Isik, and A. Krishnaswamy, “Attention wave-u-net for
+                speech enhancement,” in WASPAA 2019, pp. 249–253.</li>
+            <li>W. Mack, S. Chakrabarty, F.-R. St¨oter, S. Braun, B. Edler, and
+                E. Habets, “Single-channel dereverberation using direct mmse
+                optimization and bidirectional lstm networks,” Proc. Interspeech
+                2018, pp. 1314–1318.</li>
+            <li>S.-W. Fu, C.-F. Liao, Y. Tsao, and S.-D. Lin, “Metricgan: Generative
+                adversarial networks based black-box metric scores optimization
+                for speech enhancement,” in International Conference
+                on Machine Learning, pp. 2031–2041.</li>
+            <li>G. J. Mysore, “Can we automatically transform speech recorded
+                on common consumer devices in real-world environments into
+                professional production quality speech? A dataset, insights, and
+                challenges,” IEEE Signal Processing Letters, vol. 22, no. 8, pp.
+                1006–1010, 2015.</li>
+            <li>J. Traer and J. H. McDermott, “Statistics of natural reverberation
+                enable perceptual separation of sound and space,” Proceedings of
+                the National Academy of Sciences, vol. 113, no. 48, pp. E7856–
+                E7865, 2016.</li>
+            </ol>
+        </div>
+    </body>
+</html>
