@@ -40,31 +40,24 @@
 -->
 
 <center>
-<P><b>*turn your volume low, samples might be too loud</b></P>
+<!-- <P><b>*turn your volume low, samples might be too loud</b></P> -->
 <table border="1" style="table-layout: fixed;">
   <tr>
   	<th>Original</th>
-    <th>n_fft=2048, hop_len=256</th>
-  	<th>n_fft=1024, hop_len=256</th>
+    <th>Degraded</th>
   </tr>
 
   <tr>
-    <td halign="center" style="word-wrap: break-word;"">
+    <td halign="center" style="word-wrap: break-word;">
 		<audio controls>
-		   <source src="LJ001-0001.wav" type="audio/wav">
+		   <source src="0001_target.wav" type="audio/wav">
 		</audio>
     </td>
 
     <td halign="center" style="word-wrap: break-word;" valign="top">
 		<audio controls>
-		   <source src="2048_256_vocoded.wav" type="audio/wav">
+		   <source src="0001_input.wav" type="audio/wav">
 		</audio>    	
-    </td>
-
-    <td halign="center" style="word-wrap: break-word;" valign="top">
-    <audio controls>
-       <source src="1024_256_vocoded.wav" type="audio/wav">
-    </audio>      
     </td>    
   </tr>
 
